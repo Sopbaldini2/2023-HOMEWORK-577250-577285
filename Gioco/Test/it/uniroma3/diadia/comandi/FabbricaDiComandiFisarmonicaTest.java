@@ -1,52 +1,49 @@
 package it.uniroma3.diadia.comandi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 
 public class FabbricaDiComandiFisarmonicaTest {
-	
-	private FabbricaDiComandiFisarmonica fabbricaDiComandi;
 
+	private FabbricaDiComandiFisarmonica fabbrica;
+	private IO io;
+	private Comando expected;
+	
 	@Before
 	public void setUp() throws Exception {
-		this.fabbricaDiComandi = new FabbricaDiComandiFisarmonica();
+		io = new IOConsole();
+		fabbrica = new FabbricaDiComandiFisarmonica(io);
+	}
+
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	public void testAiuto() {
-		testaNomeParametroComando("aiuto", "aiuto", null);
+	public void testComandoNonValido() {
+		expected = new ComandoNonValido();
+		assertEquals( expected.getNome(), fabbrica.costruisciComando("pippo").getNome());
 	}
 	
 	@Test
-	public void testVai() {
-		testaNomeParametroComando("vai","vai", "nord");
+	public void testComandoConParametro() {
+		expected = new ComandoVai();
+		expected.setParametro("nord");
+		Comando current = fabbrica.costruisciComando("vai nord");
+		assertEquals( expected.getNome(), current.getNome());
+		assertEquals( expected.getParametro(), current.getParametro());
 	}
 	
 	@Test
-	public void testFine() {
-		testaNomeParametroComando("fine","fine",  null);
-	}
-	
-	@Test
-	public void testPrendi() {
-		testaNomeParametroComando("prendi","prendi", "osso");
-	}
-	
-	@Test
-	public void testPosa() {
-		testaNomeParametroComando("posa","posa",  "osso");
-	}	
-	
-	private void testaNomeParametroComando(String nomeComando, String comandoAtteso, String parametroDaFornire) {
-		Comando comando = this.fabbricaDiComandi.costruisciComando(nomeComando, new IOConsole());
-		if (parametroDaFornire != null) 
-			comando.setParametro(parametroDaFornire);
-		assertEquals(comandoAtteso, comando.getNome());
-		assertEquals(parametroDaFornire, comando.getParametro());
+	public void testComandoSenzaParametro() {
+		expected = new ComandoFine();
+		assertEquals( expected.getNome(), fabbrica.costruisciComando("fine").getNome());
 	}
 
 }

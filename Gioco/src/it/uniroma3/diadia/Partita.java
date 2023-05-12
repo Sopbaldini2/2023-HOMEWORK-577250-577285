@@ -14,14 +14,16 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
+
+
 	private Labirinto labirinto;
 	private Giocatore giocatore;
 	private boolean finita;
 
-	public Partita(){
-		labirinto = new Labirinto();
+	public Partita(Labirinto labirinto){
+		this.labirinto = labirinto;
 		giocatore = new Giocatore();
-		labirinto.creaStanze();
+		//labirinto.creaStanze();
 		this.finita = false;
 	}
 

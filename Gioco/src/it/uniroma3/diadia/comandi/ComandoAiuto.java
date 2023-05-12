@@ -5,10 +5,9 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoAiuto implements Comando {
 
-	static final public String[] ELENCO_COMANDI={"vai", "aiuto", "fine", "prendi", "posa", "guarda"};
+	static final public String[] ELENCO_COMANDI = {"vai", "aiuto", "fine","prendi", "posa", "guarda"};
 	private IO io;
 	private final static String NOME = "aiuto";
-	
 
 	@Override
 	public void esegui(Partita partita) {
@@ -41,4 +40,3 @@ public class ComandoAiuto implements Comando {
 	}
 
 }
-

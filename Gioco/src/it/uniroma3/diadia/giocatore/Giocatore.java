@@ -20,15 +20,12 @@ public class Giocatore {
 	}
 
 	public Borsa getBorsa() {
-		return this.borsa;
+		return borsa;
 	}
 
 	public void setBorsa(Borsa borsa) {
 		this.borsa = borsa;
 	}	
-
-	@Override
-	public String toString() {
-		return this.cfu + this.borsa.toString();
-	}
+	
+	
 }

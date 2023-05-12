@@ -5,27 +5,40 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class LabirintoTest {
-	private Labirinto labirinto;
-	private Stanza atrio;
-	private Stanza biblioteca;
-	
+	Labirinto l;
+	Stanza biblioteca;
+	Stanza DS1;
+
 	@Before
 	public void setUp() {
-		this.labirinto=new Labirinto();
-		atrio=this.labirinto.getStanzaCorrente();
-		biblioteca=this.labirinto.getStanzaVincente();
+		l = Labirinto.newBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
+		
+		biblioteca = new Stanza("Biblioteca");
+		DS1 = new Stanza("DS1");
+		
 	}
 
+
 	@Test
-	public void testStanzaCorrente() {
-		assertEquals(atrio, this.labirinto.getStanzaCorrente());
+	public void testGetStanzaVincente() {
+		assertEquals("Biblioteca", l.getStanzaVincente().getNome());
 	}
-	
+
+
 	@Test
-	public void testStanzaVincente() {
-		assertEquals(biblioteca,this.labirinto.getStanzaVincente());
+	public void testSetStanzaCorrente() {
+		l.setStanzaCorrente(DS1);
+		assertEquals(DS1, l.getStanzaCorrente());
+	}
+	@Test
+	public void testGetStanzaCorrente() {
+		assertEquals("Atrio", l.getStanzaCorrente().getNome());
 	}
 
 }

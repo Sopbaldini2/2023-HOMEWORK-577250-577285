@@ -14,7 +14,7 @@ public class ComandoGuarda implements Comando {
 		io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		io.mostraMessaggio("Hai ancora: "+partita.getGiocatore().getCfu()+ "CFU");
 		io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
-		
+
 	}
 
 	@Override
@@ -40,4 +40,3 @@ public class ComandoGuarda implements Comando {
 		return NOME;
 	}
 }
-
